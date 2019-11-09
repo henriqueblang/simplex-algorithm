@@ -51,11 +51,7 @@ def findPivotLine(matrix, numRows, numColumns, pivotColumn):
     return lineIndex
         
 def hasNegative(matrix, numColumns):
-    for i in range(numColumns):
-        if matrix[0, i] < 0:
-            return True
-
-    return False
+    return any(matrix[0, i] < 0 for i in range(numColumns))
 
 def solve(matrix, numRows, numColumns, lineVariables, columnVariables):
 
