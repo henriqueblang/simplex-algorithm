@@ -4,7 +4,7 @@ from simplex import optimize
 def main():
 
     variables = int(input("How many variables? "))
-    restrictionsNum = int(input("How many restrictions? "))+1
+    restrictionsNum = int(input("How many restrictions? ")) + 1
     columns = variables + restrictionsNum
     lines = restrictionsNum
     sizeMatrix = columns * lines
@@ -13,23 +13,23 @@ def main():
 
     print("\nFrom Z:")
     for i in range(variables):
-        auxArray.append(-1*float(input("\t" + str(i+1) + "º coeficient: ")))
+        auxArray.append(-1 * float(input("\t" + str(i+1) + "º coeficient: ")))
 
     [auxArray.append(0) for k in range(1, restrictionsNum)]
         
     auxArray.append(0)
 
-    for i in range(1,restrictionsNum):
+    for i in range(1, restrictionsNum):
         print("From " + str(i) + "º restriction:" )
         for j in range(variables):
             auxArray.append(float(input("\t" + str(j+1) + "º coeficient: ")))
-        for k in range(1,restrictionsNum):
+        for k in range(1, restrictionsNum):
             auxArray.append(1) if k == i else auxArray.append(0)
                 
-        auxArray.append(float(input("\tThis restriction is <= than: " )))
+        auxArray.append(float(input("\tThis restriction is <= than: ")))
     
     lpp = np.array(auxArray)
-    lpp = lpp.reshape(lines , columns)
+    lpp = lpp.reshape(lines, columns)
 
     print("\nThis is your LPP matrix: \n" + str(lpp))
 
