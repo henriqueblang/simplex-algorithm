@@ -5,11 +5,14 @@ def main():
 
     variables = int(input("How many variables? "))
     restrictionsNum = int(input("How many restrictions? ")) + 1
+
     columns = variables + restrictionsNum
     lines = restrictionsNum
     sizeMatrix = columns * lines
     lpp = np.zeros(sizeMatrix)
     auxArray = []
+
+    unit = input("Variables unit: ")
 
     print("\nFrom Z:")
     for i in range(variables):
@@ -21,12 +24,16 @@ def main():
 
     for i in range(1, restrictionsNum):
         print("From " + str(i) + "º restriction:" )
+
+        direction = input("Is it <= or >=: ")
+        factor = direction == "<=" and 1 or -1
+        
         for j in range(variables):
-            auxArray.append(float(input("\t" + str(j + 1) + "º coeficient: ")))
+            auxArray.append(float(input("\t" + str(j + 1) + "º coeficient: ")) * factor)
         for k in range(1, restrictionsNum):
             auxArray.append(1) if k == i else auxArray.append(0)
                 
-        auxArray.append(float(input("\tThis restriction is <= than: ")))
+        auxArray.append(float(input("\tThis restriction is " + direction + " than: ")))
     
     lpp = np.array(auxArray)
     lpp = lpp.reshape(lines, columns)
@@ -46,12 +53,12 @@ def main():
     print("\tZ*: R$ " + str(solution["profit"]))
 
     print("** Best investment")
-    for decisionVariable in solution["investment"].items():
-        print("\t" + decisionVariable[0] + "*: R$", decisionVariable[1])
+    for decisionVariable in sorted(solution["investment"].keys()):
+        print("\t" + decisionVariable + "*: " + "{0:.2f}".format(solution["investment"][decisionVariable]) + " " + unit)
 
     print("** Shadow price")
     for auxVariable in solution["shadow"].items():
-        print("\t" + auxVariable[0] + "*: R$", auxVariable[1])
+        print("\t" + auxVariable[0] + "*: R$%.2f" % auxVariable[1])
 
 
 if __name__ == "__main__":
