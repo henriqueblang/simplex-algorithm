@@ -13,7 +13,7 @@ def main():
 
     print("\nFrom Z:")
     for i in range(variables):
-        auxArray.append(-1 * float(input("\t" + str(i+1) + "º coeficient: ")))
+        auxArray.append(-1 * float(input("\t" + str(i + 1) + "º coeficient: ")))
 
     [auxArray.append(0) for k in range(1, restrictionsNum)]
         
@@ -22,7 +22,7 @@ def main():
     for i in range(1, restrictionsNum):
         print("From " + str(i) + "º restriction:" )
         for j in range(variables):
-            auxArray.append(float(input("\t" + str(j+1) + "º coeficient: ")))
+            auxArray.append(float(input("\t" + str(j + 1) + "º coeficient: ")))
         for k in range(1, restrictionsNum):
             auxArray.append(1) if k == i else auxArray.append(0)
                 
