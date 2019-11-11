@@ -11,20 +11,34 @@ def main():
     lpp = np.zeros(sizeMatrix)
     auxArray = []
 
-    for i in range(lines):
-        for j in range(columns):
-            value = float(input("Value [" + str(i+1) + "][" + str(j+1) + "]: "))
-            auxArray.append(value)
+    print("\nFrom Z:")
+    for i in range(variables):
+        auxArray.append(-1*float(input("\t" + str(i+1) + "º coeficient: ")))
 
+    [auxArray.append(0) for k in range(1, restrictionsNum)]
+        
+    auxArray.append(0)
+
+    for i in range(1,restrictionsNum):
+        print("From " + str(i) + "º restriction:" )
+        for j in range(variables):
+            auxArray.append(float(input("\t" + str(j+1) + "º coeficient: ")))
+        for k in range(1,restrictionsNum):
+            auxArray.append(1) if k == i else auxArray.append(0)
+                
+        auxArray.append(float(input("\tThis restriction is <= than: " )))
+    
     lpp = np.array(auxArray)
-    lpp = lpp.reshape((lines, columns))
+    lpp = lpp.reshape(lines , columns)
+
+    print("\nThis is your LPP matrix: \n" + str(lpp))
 
     '''
     [-5, -7, -8, 0, 0, 0],
     [1, 1, 2, 1, 0, 1190],
     [3, 4.5, 1, 0, 1, 4000]
     '''
-    
+
     # Output optimization
     solution = optimize(lpp)
 
