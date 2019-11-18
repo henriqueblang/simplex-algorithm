@@ -88,6 +88,10 @@ def optimize(matrix):
 
     optimalSolution, newLineVariables, newColumnVariables = solve(matrix, numRows, numColumns, lineVariables.copy(), columnVariables.copy())
 
+    print()
+    print("Result matrix:")
+    print(optimalSolution)
+
     zeroVariables = list(set(newLineVariables[1:]) ^ set(columnVariables[0:(numRows - numColumns)]))
     zeroVariables.sort()
 

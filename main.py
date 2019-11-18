@@ -48,12 +48,17 @@ def main():
 
     # Output optimization
     solution = optimize(lpp)
+    dvCount = 0
 
     print("\n\n** Optimal profit")
     print("\tZ*: R$ " + str(solution["profit"]))
 
     print("** Best investment")
     for decisionVariable in sorted(solution["investment"].keys()):
+        if dvCount == variables:
+            break
+
+        dvCount += 1
         print("\t" + decisionVariable + "*: " + "{0:.2f}".format(solution["investment"][decisionVariable]) + " " + unit)
 
     print("** Shadow price")
